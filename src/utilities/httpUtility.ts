@@ -1,8 +1,5 @@
 import axios from 'axios';
-import { debuglog } from 'util';
 import { HttpUtilityOptions, HttpUtilityParams } from '../interfaces/Http';
-
-const log = debuglog('test');
 
 // paramerter helper function to take an parameter object and convert it to a url parameter string
 function getParamString(params: HttpUtilityParams): string {
