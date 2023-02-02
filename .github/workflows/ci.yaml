@@ -11,6 +11,8 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
+        env: # Or as an environment variable
+          API_KEY: ${{ secrets.API_KEY }}
         run: npm install
       - name: Run tests and collect coverage
         run: npm run test

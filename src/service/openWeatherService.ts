@@ -1,9 +1,8 @@
 import moment from "moment";
-import { config } from "../config";
+import { API_KEY } from "../config";
 import { Alert, WeatherApi, WeatherResponse } from "../types/Weather";
 import * as httpUtility from "../utilities/httpUtility";
 
-const API_KEY = config.API_KEY ?? '';
 
 type Units = 'imperial' | 'metric';
 

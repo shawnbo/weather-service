@@ -2,6 +2,7 @@ import nock from "nock";
 import * as supertest from 'supertest';
 
 import { app } from '../app';
+import { API_KEY } from "../config";
 
 
 describe('app test', () => {
@@ -23,7 +24,7 @@ describe('app test', () => {
   test('it should pass a nocked API call', async () => {
     nock('https://api.openweathermap.org')
       .get('/data/2.5/weather')
-      .query({ lat: 1, lon: 1, appid: 'a43413689d058d0f39a232da61dfd5a8', units: 'imperial' })
+      .query({ lat: 1, lon: 1, appid: API_KEY, units: 'imperial' })
       .reply(200, data);
 
     const response = await supertest.agent(app)
@@ -49,7 +50,7 @@ describe('app test', () => {
   test('it should handle an error', async () => {
     nock('https://api.openweathermap.org')
       .get('/data/2.5/weather')
-      .query({ lat: 1, lon: 1, appid: 'a43413689d058d0f39a232da61dfd5a8', units: 'imperial' })
+      .query({ lat: 1, lon: 1, appid: API_KEY, units: 'imperial' })
       .reply(500, { message: 'an error has occurred' });
 
     const response = await supertest.agent(app)
