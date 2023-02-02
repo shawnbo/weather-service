@@ -1,20 +1,11 @@
 import moment from "moment";
 import { API_KEY } from "../config";
-import { Alert, WeatherApi, WeatherResponse } from "../types/Weather";
+import { HttpUtilityOptions } from "../types/Http";
+import { Alert, CurrentAlert, HttpParams, TemperatureOptions, WeatherApi, WeatherResponse } from "../types/Weather";
 import * as httpUtility from "../utilities/httpUtility";
 
 
-type Units = 'imperial' | 'metric';
-
-type HttpParams = {
-  lat: number | string;
-  lon: number | string;
-  appid: string;
-  units?: Units;
-};
-
 type Temperature = 'hot' | 'moderate' | 'cold';
-
 // convert temperature to string value
 function getTemperatureFeel(temp: number): Temperature {
   if (temp >= 80) {
@@ -34,24 +25,31 @@ function hasAlerts(alerts?: Alert[]): boolean {
 }
 
 // check to see if there any active alerts based on time
-function getCurrentAlerts(alerts?: Alert[]): Alert[] | undefined {
+function getCurrentAlerts(alerts?: Alert[]): CurrentAlert[] | undefined {
   if (!alerts) {
     return undefined;
   }
 
-  return alerts.filter(alert => {
+  const filteredAlerts = alerts.filter(alert => {
     return moment().isBetween(alert.start, alert.end);
+  });
+
+  return filteredAlerts.map((alert) => {
+    return {
+      event: alert.event
+    };
   });
 };
 
+// main get weather service that uses the http utility to send a get request
 export async function getWeather(lat: string, lon: string): Promise<WeatherResponse> {
   if (!(lat && lon)) {
     throw new Error('Latatitude and longitude are required');
   }
 
-  const params: HttpParams = { lat, lon, appid: API_KEY, units: 'imperial' };
+  const options: HttpUtilityOptions = { params: { lat, lon, appid: API_KEY, units: 'imperial' } };
 
-  const data = await httpUtility.get<WeatherApi>(`https://api.openweathermap.org/data/2.5/weather`, { params });
+  const data = await httpUtility.get<WeatherApi>(`https://api.openweathermap.org/data/2.5/weather`, options);
 
   return {
     condition: data.weather[0]?.main,

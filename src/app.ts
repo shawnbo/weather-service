@@ -3,6 +3,7 @@ import express, { Request, Response } from 'express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import { getWeather } from './service/openWeatherService';
 import { serve, setup } from 'swagger-ui-express';
+import { version } from '../package.json';
 
 const app = express();
 
@@ -11,7 +12,7 @@ const options: swaggerJSDoc.Options = {
     openapi: '3.0.0',
     info: {
       title: 'Weather Service App',
-      version: '1.0.0',
+      version: version,
       description: 'A simple app that calls Open Weather Map API'
     },
   },
@@ -25,18 +26,20 @@ app.use('/api-docs', serve, setup(openapiSpecification));
 /**
  * @openapi
  * /:
- *  description: Responds with weather JSON data
  *  get:
- *    tag:
- *    - Weather
+ *    tags:
+ *      - Weather
+ *    description: API endpoint that responds with weather JSON data. It requires latitude and longitude query paramaters
  *    parameters:
  *    - name: lat
  *      in: query
+ *      description: Latitude
  *      schema:
  *        type: string
  *      required: true
  *    - name: lon
  *      in: query
+ *      description: Longitude
  *      schema:
  *        type: string
  *      required: true
@@ -50,7 +53,6 @@ app.use('/api-docs', serve, setup(openapiSpecification));
  *                - condition
  *                - weather
  *                - hasAlerts
- *                - currentAlerts
  *              properties:
  *                condition:
  *                  type: string
@@ -60,6 +62,13 @@ app.use('/api-docs', serve, setup(openapiSpecification));
  *                  type: string
  *                currentAlerts:
  *                  type: array
+ *                  items:
+ *                    type: object
+ *                    required:
+ *                      - event
+ *                    properties:
+ *                      event:
+ *                        type: string
  */
 app.get('/', async (req: Request, res: Response) => {
   const lat: string = req.query.lat as string;

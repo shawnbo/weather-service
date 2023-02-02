@@ -39,12 +39,7 @@ describe('app test', () => {
         hasAlerts: true,
       }
     });
-    expect(response.body.data.currentAlerts[0]).toHaveProperty('sender_name');
     expect(response.body.data.currentAlerts[0]).toHaveProperty('event');
-    expect(response.body.data.currentAlerts[0]).toHaveProperty('start');
-    expect(response.body.data.currentAlerts[0]).toHaveProperty('end');
-    expect(response.body.data.currentAlerts[0]).toHaveProperty('description');
-    expect(response.body.data.currentAlerts[0]).toHaveProperty('tags');
   });
 
   test('it should handle an error', async () => {
