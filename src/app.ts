@@ -35,13 +35,13 @@ app.use('/api-docs', serve, setup(openapiSpecification));
  *      in: query
  *      description: Latitude
  *      schema:
- *        type: string
+ *        type: number
  *      required: true
  *    - name: lon
  *      in: query
  *      description: Longitude
  *      schema:
- *        type: string
+ *        type: number
  *      required: true
  *    responses:
  *      200:
