@@ -1,3 +1,4 @@
+[![codecov](https://codecov.io/gh/shawnbo/weather-service/branch/main/graph/badge.svg?token=PR40RWEIRA)](https://codecov.io/gh/shawnbo/weather-service)
 # Example Weather Service API
 This is an example weather service API that uses the [OpenWeather API](https://openweathermap.org/api)
 
