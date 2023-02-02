@@ -18,7 +18,6 @@ describe('openWeatherService test', () => {
     (httpUtility.get as jest.Mock).mockResolvedValue({
       main: { temp: 90 },
       weather: [{ main: '' }],
-      alerts: []
     });
 
     const results = await getWeather('0', '0');
@@ -30,7 +29,6 @@ describe('openWeatherService test', () => {
     (httpUtility.get as jest.Mock).mockResolvedValue({
       main: { temp: 50 },
       weather: [{ main: '' }],
-      alerts: []
     });
 
     const results = await getWeather('0', '0');
@@ -42,7 +40,6 @@ describe('openWeatherService test', () => {
     (httpUtility.get as jest.Mock).mockResolvedValue({
       main: { temp: 49 },
       weather: [{ main: '' }],
-      alerts: []
     });
 
     const results = await getWeather('0', '0');
