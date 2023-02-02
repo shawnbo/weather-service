@@ -62,13 +62,24 @@ export interface Alert {
   tags: any[];
 }
 
+export interface CurrentAlert {
+  event: string;
+}
+
 export interface WeatherResponse {
   condition: string;
   temperature: string;
   hasAlerts: boolean;
-  currentAlerts?: Alert[];
+  currentAlerts?: CurrentAlert[];
 }
 
-export interface Temperature {
+export interface HttpParams {
+  lat: number | string;
+  lon: number | string;
+  appid: string;
+  units?: 'imperial' | 'metric';
+}
 
+export interface TemperatureOptions {
+  temperature: 'hot' | 'moderate' | 'cold';
 }

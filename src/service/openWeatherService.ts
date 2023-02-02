@@ -1,7 +1,7 @@
 import moment from "moment";
 import { API_KEY } from "../config";
-import { HttpUtilityOptions } from "../types/Http";
-import { Alert, CurrentAlert, HttpParams, TemperatureOptions, WeatherApi, WeatherResponse } from "../types/Weather";
+import { HttpUtilityOptions } from "../interfaces/Http";
+import { Alert, CurrentAlert, HttpParams, TemperatureOptions, WeatherApi, WeatherResponse } from "../interfaces/Weather";
 import * as httpUtility from "../utilities/httpUtility";
 
 
